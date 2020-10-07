@@ -6,88 +6,37 @@
       </div>
       
       <div>
+        
+        
+        
         <h2 :class="$style.title">{{ vehicle.name }}</h2>
         
-        <DetailsTabs>
-          <DetailsTab name="Specifications" selected="true">
-            <p :class="$style.description">{{ vehicle.specifications_text }}</p>
-            
-            <h3 :class="$style.featuresHeader">Features:</h3>
-            
-            <ul :class="$style.featuresList">
-              <li :class="$style.featuresItem">
-                <span
-                  :class="[$style.featuresItemIcon, $style.featuresItemIconCup]"
-                ></span>
-                <div :class="$style.featuresItemContainer">
-                  <h4 :class="$style.featuresItemHeader">
-                    A challenge for a true champion
-                  </h4>
-                  <p :class="$style.featuresItemText">
-                    Amet minim mollit non deserunt ullamco est sit aliqua dolor do
-                    amet sint. Velit officia consequat duis enim velit mollit.
-                  </p>
-                </div>
-              </li>
-              <li :class="$style.featuresItem">
-                <span
-                  :class="[$style.featuresItemIcon, $style.featuresItemIconPerson]"
-                ></span>
-                <div :class="$style.featuresItemContainer">
-                  <h4 :class="$style.featuresItemHeader">Pilot's sweaty hands</h4>
-                  <p :class="$style.featuresItemText">
-                    Amet minim mollit non deserunt ullamco est sit aliqua dolor do
-                    amet sint. Velit officia consequat duis enim velit mollit.
-                  </p>
-                </div>
-              </li>
-            </ul>
-          </DetailsTab>
+        <div>
+          <ul :class="$style.specList">
+            <li :class="$style.specItem">
+              <a href="#" :class="$style.specLink"  @click.prevent="showTabs('')">specifications</a>
+            </li>
+            <li :class="$style.specItem">
+              <a href="#" :class="$style.specLink"  @click.prevent="showTabs('team')">team</a>
+            </li>
+            <li :class="$style.specItem">
+              <a href="#" :class="$style.specLink" class="is-active" @click.prevent="showTabs('rent')">rent terms</a>
+            </li>
           
-          <DetailsTab name="Team">
-            <p :class="$style.description">{{ vehicle.team_text }}</p>
-            
-            <h3 :class="$style.featuresHeader">Qualified specialists </h3>
-            
-            <ul :class="$style.specList">
-              <li :class="$style.specItem">
-                <img  :class="$style.specImg" src="@/static/img/specialist01.jpg" alt="specialist-img">
-                <div :class="$style.specContent">
-                  <h4 :class="$style.specHeader">Marvin McKinney</h4>
-                  <span :class="$style.specText">Pilot assistant</span>
-                </div>
-              </li>
-              <li :class="$style.specItem">
-                <img :class="$style.specImg" src="@/static/img/specialist02.jpg" alt="specialist-img">
-                <div :class="$style.specContent">
-                  <h4 :class="$style.specHeader">Savannah Nguyen</h4>
-                  <span :class="$style.specText">Mechanic</span>
-                </div>
-              </li>
-              <li :class="$style.specItem">
-                <img :class="$style.specImg" src="@/static/img/specialist03.jpg" alt="specialist-img">
-                <div :class="$style.specContent">
-                  <h4 :class="$style.specHeader">Courtney Henry</h4>
-                  <span :class="$style.specText">Stewardess</span>
-                </div>
-              </li>
-            </ul>
-            
-            <p :class="$style.description">Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.</p>
-          </DetailsTab>
-          
-          <DetailsTab name="Rent terms">
-            <p :class="$style.description">{{ vehicle.term_text }}</p>
-            
-            <h4 :class="$style.termsHeader">Additional conditions:</h4>
-            
-            <ul :class="$style.termsList">
-              <li :class="$style.termsItem">Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.</li>
-              <li :class="$style.termsItem">Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint.</li>
-              <li :class="$style.termsItem">Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit.</li>
-            </ul>
-          </DetailsTab>
-        </DetailsTabs>
+          </ul>
+        </div>
+        
+        <p :class="$style.description">{{ vehicle.term_text }}</p>
+  
+        <h4 :class="$style.termsHeader">Additional conditions:</h4>
+  
+        <ul :class="$style.termsList">
+          <li :class="$style.termsItem">Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.</li>
+          <li :class="$style.termsItem">Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint.</li>
+          <li :class="$style.termsItem">Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit.</li>
+        </ul>
+        
+        
         
         <div :class="$style.rentBackgroundMobile">
           <div :class="$style.rentContainer">
@@ -107,6 +56,9 @@
   import DatailsTab from "@/components/DetailsTab";
 
   export default {
+    async fetch ({ store }) {
+      await store.dispatch('vehicles/fetch')
+    },
     computed: {
       vehicle() {
         const pageName = this.$route.params.id;
@@ -115,10 +67,20 @@
         const vehicleItem = { ...vehicle[0] };
         return vehicleItem;
       }
+    },
+    methods:{
+      showTabs(...args){
+        this.$router.push('/' + `${this.$route.params.id}/${args}` )
+      }
     }
   };
 </script>
 
+<style>
+  .is-active {
+    color: var(--primary-color) !important;
+  }
+</style>
 <style module>
   .detailContainer {
     display: flex;
@@ -319,6 +281,8 @@
     margin-bottom: 32px;
   }
   
+  
+  
   .specImg {
     width: 162px;
     height: 96px;
@@ -391,6 +355,60 @@
     background: var(--secondary);
     border-radius: 50%;
   }
+  
+  .specList {
+    display: flex;
+    justify-content: unset !important;
+    margin: 0 0 32px 0;
+    padding: 0;
+    list-style: none;
+  }
+  
+  .specLink {
+    display: block;
+    margin-right: 32px;
+    font-weight: 700;
+    line-height: 16px;
+    color: var(--light-text);
+    transition: .2s ease;
+    user-select: none;
+  }
+  
+  .dark .specLink {
+    color: var(--night-text);
+  }
+  
+  .specLink:hover {
+    color: var(--primary-hover);
+  }
+  
+  .specLink:active {
+    color: var(--primary-active);
+  }
+  
+  @media (max-width: 900px) {
+    .specList {
+      margin-bottom: 24px;
+    }
+  }
+  
+  @media (max-width: 400px) {
+    .specList {
+      margin-bottom: 20px;
+    }
+    
+    .specLink {
+      margin-right: 20px;
+    }
+  }
+  
+  @media (max-width: 400px) {
+    .specLink {
+      margin-right: 18px;
+      font-size: 14px;
+    }
+  }
+  
   
   @media (max-width: 1800px) {
     .image {

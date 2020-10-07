@@ -1,12 +1,11 @@
 <template>
-  <div @click="test" :class="$style.listItemLink">
-    
-    <img :src='`${vehicle.preview}`' alt="" :class="$style.itemImg">
-    <div :class="$style.itemContent">
-      <h3 :class="$style.itemTitle">{{vehicle.name}}</h3>
-      <p :class="$style.itemDescription">{{vehicle.description}}</p>
-      <span :class="$style.itemRent">{{vehicle.rent}} $/h</span>
-    </div>
+  <div @click.prevent="test" :class="$style.listItemLink">
+      <img :src='`${vehicle.preview}`' alt="" :class="$style.itemImg">
+      <div :class="$style.itemContent">
+        <h3 :class="$style.itemTitle">{{vehicle.name}}</h3>
+        <p :class="$style.itemDescription">{{vehicle.description}}</p>
+        <span :class="$style.itemRent">{{vehicle.rent}} $/h</span>
+      </div>
   </div>
 </template>
 

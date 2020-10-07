@@ -16,23 +16,6 @@
       </div>
       <ul :class="$style.list">
         <Card v-bind:vehicle="vehicle" v-for="vehicle of filtredVehicles" :class="$style.listItem" :key="vehicle.id"/>
-<!--        <li>-->
-<!--          <a-->
-<!--            :class="$style.listItemLink"-->
-<!--            href="#"-->
-<!--          >-->
-<!--            <img-->
-<!--              :class="$style.itemImg"-->
-<!--              :src="`${vehicle.preview}`"-->
-<!--              alt="preview"-->
-<!--            />-->
-<!--            <div :class="$style.itemContent">-->
-<!--              <h3 :class="$style.itemTitle">{{ vehicle.name }}</h3>-->
-<!--              <p :class="$style.itemDescription">{{ vehicle.description }}</p>-->
-<!--              <span :class="$style.itemRent">{{ vehicle.rent }} $/h</span>-->
-<!--            </div>-->
-<!--          </a>-->
-<!--        </li>-->
       </ul>
     </div>
   </div>
@@ -64,6 +47,13 @@
         if (this.type === 'whatever') {
           return vehicles
         }
+        return vehicles.filter(elem => {
+          if (filtredType === '') {
+            return true;
+          } else {
+            return elem.type.indexOf(filtredType) > -1;
+          }
+        })
       },
     },
     methods: {
