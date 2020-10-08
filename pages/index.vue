@@ -14,9 +14,9 @@
           <button :class="$style.buttonAdd">+</button>
         </a>
       </div>
-      <ul :class="$style.list">
+      <div :class="$style.list">
         <Card v-bind:vehicle="vehicle" v-for="vehicle of filtredVehicles" :class="$style.listItem" :key="vehicle.id"/>
-      </ul>
+      </div>
     </div>
   </div>
 </template>
@@ -58,7 +58,7 @@
     },
     methods: {
       showModal () {
-        console.log('ShowModal()')
+        this.$store.commit("vehicles/toggleModal");
       },
     },
   }

@@ -18,7 +18,7 @@ export const mutations = {
     state.vehicles = vehicles;
   },
   addVehicle(state, payload) {
-    state.vehicles.push({ ...payload });
+    state.vehicles.unshift({ ...payload });
     console.log(state);
   },
   toggleModal(state) {

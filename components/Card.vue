@@ -1,12 +1,15 @@
 <template>
-  <div @click.prevent="test" :class="$style.listItemLink">
+  <div :class="{ [$style.dark]: this.$store.state.vehicles.isNightMode }">
+    <div @click.prevent="viewCardDetails" :class="$style.listItemLink">
       <img :src='`${vehicle.preview}`' alt="" :class="$style.itemImg">
       <div :class="$style.itemContent">
         <h3 :class="$style.itemTitle">{{vehicle.name}}</h3>
         <p :class="$style.itemDescription">{{vehicle.description}}</p>
         <span :class="$style.itemRent">{{vehicle.rent}} $/h</span>
       </div>
+    </div>
   </div>
+  
 </template>
 
 <script>
@@ -17,12 +20,12 @@
     },
     data(){
       return {
-        a: this.vehicle
+        item: this.vehicle
       }
     },
     methods: {
-      test(){
-        this.$router.push('/' + this.a.name)
+      viewCardDetails(){
+        this.$router.push('/' + this.item.name)
       }
     }
   }
@@ -40,6 +43,7 @@
     padding: 25px 32px;
     background: var(--white);
     border-radius: 32px;
+    cursor: pointer;
   }
   .itemImg {
     width: 88px;
@@ -70,5 +74,51 @@
     font-size: 14px;
     line-height: 21px;
     color: var(--secondary);
+  }
+  .dark .listItemLink {
+    background-color: var(--night);
+  }
+  .dark .itemTitle {
+    color: var(--white);
+  }
+  .dark .itemDescription {
+    color: var(--night-text);
+  }
+  @media (max-width: 1700px) {
+    .listItem {
+      width: 30%;
+    }
+  }
+
+  @media (max-width: 1150px) {
+    .listItem {
+      width: 46%;
+    }
+  }
+  @media (max-width: 950px) {
+    .listItem {
+      width: 100%;
+    }
+  }
+  @media (max-width: 700px) {
+    .listItemLink {
+      margin-bottom: 20px;
+    }
+  }
+  @media (max-width: 520px) {
+    .listItem {
+      padding: 0;
+    }
+    .listItemLink {
+      padding: 20px;
+    }
+  
+    .itemImg {
+      margin-right: 20px;
+    }
+  
+    .itemTitle {
+      font-size: 16px;
+    }
   }
 </style>

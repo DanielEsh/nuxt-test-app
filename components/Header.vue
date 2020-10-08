@@ -1,30 +1,32 @@
 <template>
-    <header>
-        <div :class="$style.header__logo">
+    <header :class="{ [$style.dark]: this.$store.state.vehicles.isNightMode }">
+        <div :class="$style.headerLogo">
           <nuxt-link to="/" :class="$style.logo">
-            <img :class="$style.logoImg" src="@/static/img/header-logo.svg" alt="logo" />
-            <img :class="$style.logoImgMob" src="@/static/img/header-logo-mob.svg" alt="logo" />
+            <img :class="$style.logoImg" src="@/static/img/header-logo-dark.svg" v-if="this.$store.state.vehicles.isNightMode" alt="logo" />
+            <img :class="$style.logoImg" src="@/static/img/header-logo.svg" v-else alt="logo" />
+            <img :class="$style.logoImgMob" src="@/static/img/header-logo-mob-dark.svg" v-if="this.$store.state.vehicles.isNightMode"alt="logo" />
+            <img :class="$style.logoImgMob" src="@/static/img/header-logo-mob.svg"  v-else alt="logo" />
           </nuxt-link>
-          <span :class="$style.promoText">World's first affordable airsharing</span>
+          <span :class="$style.logoText">World's first affordable airsharing</span>
         </div>
       
         <div :class="$style.right">
-          <a :class="$style.nightContainer" href="#" @click.prevent="setDarkMode()">
+          <a :class="$style.nightModeContainer" href="#" @click.prevent="setDarkMode()">
             <i :class="$style.nightModeIcon" class="nightModeIcon"></i>
             <span :class="$style.nightMode" v-if="this.$store.state.vehicles.isNightMode">Day mod</span>
             <span :class="$style.nightMode" v-else>Night mod</span>
           </a>
         
-          <div :class="$style.buttons">
+          <div :class="$style.utils">
             <a href="#" :class="$style.questions"></a>
-            <a href="#" :class="$style.bell"></a>
+            <a href="#" :class="$style.notifications"></a>
           </div>
         
           <a href="#" :class="$style.profile">
-            <span :class="$style.name">Bessie Cooper</span>
+            <span :class="$style.profileUserName">Bessie Cooper</span>
             <img
               src="@/static/img/avatar.png"
-              :class="$style.avatar"
+              :class="$style.profileImg"
               alt="avatar"
             />
           </a>
@@ -37,6 +39,13 @@
     methods: {
       setDarkMode() {
         console.log('setDarkMode()')
+        this.$store.commit("vehicles/setNightMode");
+
+        if (this.$store.state.vehicles.isNightMode) {
+          document.body.style.backgroundColor = "var(--night)";
+        } else {
+          document.body.style.backgroundColor = "#ffffff";
+        }
       }
     }
   };
@@ -51,7 +60,7 @@
     margin: 0px 0 40px 0;
     padding-top: 48px;
   }
-  .header__logo {
+  .headerLogo {
     display: flex;
     align-items: center;
   }
@@ -71,7 +80,7 @@
     display: none;
   }
   
-  .promoText {
+  .logoText {
     display: block;
     font-weight: 300;
     font-size: 16px;
@@ -79,11 +88,11 @@
     color: var(--light-text);
   }
   
-  .dark .promoText {
+  .dark .logoText {
     color: var(--night-text);
   }
   
-  .nightContainer {
+  .nightModeContainer {
     display: flex;
     align-items: center;
     user-select: none;
@@ -119,7 +128,7 @@
     background: url("~static/img/ic-light.svg");
   }
   
-  .buttons {
+  .utils {
     display: flex;
     margin-right: 59px;
     margin-left: 97px;
@@ -132,7 +141,7 @@
     background: url("~static/img/ic-questions.svg");
   }
   
-  .bell {
+  .notifications {
     display: block;
     width: 24px;
     height: 24px;
@@ -146,17 +155,17 @@
     user-select: none;
   }
   
-  .name {
+  .profileUserName {
     display: block;
     font-weight: bold;
     color: var(--night);
   }
   
-  .dark .name {
+  .dark .profileUserName {
     color:var(--white);
   }
   
-  .avatar {
+  .profileImg {
     margin-left: 16px;
     border-radius: 50%;
   }
@@ -166,7 +175,7 @@
       margin-right: 25px;
     }
     
-    .buttons {
+    .utils {
       margin-left: 50px;
     }
   }
@@ -180,19 +189,19 @@
       margin-left: 40px;
     }
     
-    .name {
+    .profileUserName {
       display: none;
     }
   }
   
   @media (max-width: 880px) {
-    .buttons {
+    .utils {
       margin-left: 30px;
     }
   }
   
   @media (max-width: 760px) {
-    .promoText {
+    .logoText {
       display: none;
     }
   }
@@ -202,7 +211,7 @@
       margin: 48px 0 20px 0;
     }
     
-    .logo {
+    .logoText {
       margin-right: 0;
     }
     
@@ -214,7 +223,7 @@
       display: block;
     }
     
-    .bell {
+    .notifications {
       width: 20px;
       height: 20px;
       margin-left: 18px;
@@ -230,19 +239,19 @@
       height: 20px;
     }
     
-    .buttons {
+    .utils {
       margin-left: 18px;
     }
     
     .profile {
-      margin-left: 18px;
+      margin-left: -18px;
     }
     
-    .name {
+    .profileUserName {
       margin-left: 0;
     }
     
-    .avatar {
+    .profileImg {
       width: 32px;
       height: 32px;
     }

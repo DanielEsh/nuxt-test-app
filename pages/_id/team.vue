@@ -70,9 +70,6 @@
 </template>
 
 <script>
-  import DatailsTabs from "@/components/DetailsTabs";
-  import DatailsTab from "@/components/DetailsTab";
-
   export default {
     async fetch ({ store }) {
       await store.dispatch('vehicles/fetch')
@@ -298,14 +295,13 @@
     flex-direction: column;
     margin-bottom: 32px;
   }
-
+  
   
   
   .specImg {
     width: 162px;
     height: 96px;
     margin-bottom: 16px;
-    margin-right: 25px;
     border-radius: 16px;
   }
   
@@ -374,7 +370,7 @@
     background: var(--secondary);
     border-radius: 50%;
   }
-
+  
   .specList {
     display: flex;
     justify-content: unset !important;
@@ -382,7 +378,7 @@
     padding: 0;
     list-style: none;
   }
-
+  
   .specLink {
     display: block;
     margin-right: 32px;
@@ -392,42 +388,42 @@
     transition: .2s ease;
     user-select: none;
   }
-
+  
   .dark .specLink {
     color: var(--night-text);
   }
-
+  
   .specLink:hover {
     color: var(--primary-hover);
   }
-
+  
   .specLink:active {
     color: var(--primary-active);
   }
-
+  
   @media (max-width: 900px) {
     .specList {
       margin-bottom: 24px;
     }
   }
-
+  
   @media (max-width: 400px) {
     .specList {
       margin-bottom: 20px;
     }
-  
+    
     .specLink {
       margin-right: 20px;
     }
   }
-
+  
   @media (max-width: 400px) {
     .specLink {
       margin-right: 18px;
       font-size: 14px;
     }
   }
-
+  
   
   @media (max-width: 1800px) {
     .image {
@@ -524,13 +520,13 @@
   
   @media (max-width: 480px) {
     .specList {
-      flex-direction: column;
+      flex-direction: row;
     }
     
     .specItem {
       display: flex;
       flex-direction: row;
-      width: 100%;
+      width: unset;
       margin-bottom: 12px;
     }
     

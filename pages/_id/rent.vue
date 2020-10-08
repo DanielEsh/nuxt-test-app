@@ -52,9 +52,6 @@
 </template>
 
 <script>
-  import DatailsTabs from "@/components/DetailsTabs";
-  import DatailsTab from "@/components/DetailsTab";
-
   export default {
     async fetch ({ store }) {
       await store.dispatch('vehicles/fetch')
@@ -505,13 +502,13 @@
   
   @media (max-width: 480px) {
     .specList {
-      flex-direction: column;
+      flex-direction: row;
     }
     
     .specItem {
       display: flex;
       flex-direction: row;
-      width: 100%;
+      width: unset;
       margin-bottom: 12px;
     }
     
@@ -631,3 +628,4 @@
   }
 
 </style>
+
