@@ -8,11 +8,11 @@ const rejectByChance = () => {
 /** Emulate request */
 export const getVehicles = () =>
     new Promise((resolve, reject) => {
-        // if (rejectByChance()) {
-        //     return reject({
-        //         error: 'Server error',
-        //     });
-        // }
+        if (rejectByChance()) {
+            return reject({
+                error: 'Server error',
+            });
+        }
         const delay = parseInt(Math.random() * 1000);
         setTimeout(() => {
             resolve(vehicles);
