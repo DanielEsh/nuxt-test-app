@@ -18,11 +18,9 @@
             </li>
             <li :class="$style.specItem">
               <a href="#" :class="$style.specLink" @click.prevent="showTabs('team')">team</a>
-<!--              <nuxt-link exact :to='`${vehicle.name}/team`'>123</nuxt-link>-->
             </li>
             <li :class="$style.specItem">
               <a href="#" :class="$style.specLink" @click.prevent="showTabs('rent')">rent terms</a>
-<!--              <nuxt-link exact :to='`${vehicle.name}/rent`'>123</nuxt-link>-->
             </li>
           
           </ul>

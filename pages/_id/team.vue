@@ -302,6 +302,7 @@
     width: 162px;
     height: 96px;
     margin-bottom: 16px;
+    margin-right: 25px;
     border-radius: 16px;
   }
   

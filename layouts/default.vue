@@ -14,8 +14,8 @@
 </template>
 
 <script>
-  import Header from '@/components/Header'
-  import AddModal from '@/components/add-modal'
+  import Header from '@/components/header'
+  import AddModal from '@/components/modal'
   
   export default {
     components: {

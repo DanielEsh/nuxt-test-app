@@ -8,11 +8,7 @@
             <option v-for="type of uniqueTypes" :key='type'>{{ type }}</option>
           </select>
         </div>
-        
-        <a :class="$style.right" href="#" @click.prevent="showModal()">
-          <span :class="$style.rightText">Add new</span>
-          <button :class="$style.buttonAdd">+</button>
-        </a>
+        <ShowModalBtn/>
       </div>
       <div :class="$style.list">
         <Card v-bind:vehicle="vehicle" v-for="vehicle of filtredVehicles" :class="$style.listItem" :key="vehicle.id"/>
@@ -22,10 +18,12 @@
 </template>
 
 <script>
-  import Card from '@/components/Card'
+  import Card from '@/components/card'
+  import ShowModalBtn from '@/components/modal/showModalBtn'
 
   export default {
     components: {
+      ShowModalBtn,
       Card,
     },
     data: () => ({
@@ -54,11 +52,6 @@
             return elem.type.indexOf(filtredType) > -1;
           }
         })
-      },
-    },
-    methods: {
-      showModal () {
-        this.$store.commit("vehicles/toggleModal");
       },
     },
   }
@@ -133,50 +126,6 @@
   
   .selectType:hover {
     color: var(--primary-hover);
-  }
-  
-  .right {
-    display: flex;
-    align-items: center;
-    user-select: none;
-  }
-  
-  .rightText {
-    font-weight: 700;
-    font-size: 20px;
-    line-height: 28px;
-    color: var(--primary-color);
-    transition: .2s ease;
-  }
-  
-  .right:hover .rightText {
-    color: var(--primary-hover);
-  }
-  
-  .right:active .rightText {
-    color: var(--primary-active);
-  }
-  
-  .buttonAdd {
-    width: 48px;
-    height: 48px;
-    margin-left: 20px;
-    background: var(--primary-color);
-    border: none;
-    border-radius: 16px;
-    font-size: 22px;
-    color: var(--white);
-    cursor: pointer;
-    transition: .2s ease;
-    outline: none;
-  }
-  
-  .right:hover .buttonAdd {
-    background: var(--primary-hover);
-  }
-  
-  .right:active .buttonAdd {
-    background: var(--primary-active);
   }
   
   .list {

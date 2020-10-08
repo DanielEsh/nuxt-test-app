@@ -7,7 +7,6 @@
     <section>
       <form @submit.prevent="submit">
         <div :class="$style.modalImg"></div>
-        <!-- <input type="file" :class="$style.modalImg" /> -->
         <input
           type="text"
           placeholder="Name"
@@ -39,8 +38,6 @@
 </template>
 
 <script>
-  import { mapActions, mapMutations, mapState } from "vuex";
-
   export default {
     name: "add-modal",
     data: () => ({

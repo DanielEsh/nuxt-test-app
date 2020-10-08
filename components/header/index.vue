@@ -38,7 +38,6 @@
   export default {
     methods: {
       setDarkMode() {
-        console.log('setDarkMode()')
         this.$store.commit("vehicles/setNightMode");
 
         if (this.$store.state.vehicles.isNightMode) {
